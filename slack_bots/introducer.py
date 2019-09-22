@@ -1,10 +1,9 @@
 """
 Bot introduces person
 """
+
 from datetime import datetime
-import random
 from pathlib import Path
-from string import digits
 
 import yaml
 
