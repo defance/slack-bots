@@ -1,5 +1,6 @@
 import os
 import random
+from pathlib import Path
 
 
 class RandomChoicer:
@@ -12,17 +13,21 @@ class RandomChoicer:
     def select(self):
         # TODO: Make thread safe
         possible = set(read_all_lines(self.file))
-        used = set(read_all_lines(self.cache_file))
+        try:
+            used = set(read_all_lines(self.cache_file))
+        except FileNotFoundError:
+            used = set()
         variants = possible - used
         if not variants:
             variants = possible
             used = set()
         selected = random.choice(tuple(variants))
         used.add(selected)
-        write_all_lines(self.cache_file, used)
+        self.save_cache(used)
         return selected
 
     def save_cache(self, cached):
+        Path(self.cache_file).parent.mkdir(parents=True, exist_ok=True)
         write_all_lines(self.cache_file, cached)
 
 
@@ -33,6 +38,6 @@ def read_all_lines(file_name):
 
 
 def write_all_lines(filename, lines):
-    with open(filename, 'w') as f:
+    with open(filename, 'w+') as f:
         for l in lines:
-            f.write(l)
+            f.write(f'{l}\n')

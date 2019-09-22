@@ -1,0 +1,17 @@
+---
+
+# Time to start conversation
+start_time: '12:00'
+
+# Time for introducer to fallback
+end_time: '16:50'
+
+# How long to wait until new question after victim's last question
+messages_delay: '600'
+
+# Channel
+channel: '#defance-dev'
+
+
+messages:
+  greeting: 'Сегодня мы знакомимся с {victim}!'
