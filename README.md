@@ -1,10 +1,15 @@
 # Collection of slack bots
 
-## Color Friday
+## Setup
+
+Slack client require `SLACK_API_TOKEN` environment variable, which is Bot User OAuth access token. 
+Consult slack documentation on how to retrieve it.
+
+## Color Friday Bot
 
 При запуске бот выбирает цвет, и сообщает о всем об этом.
 
 
-## Hello to @username
+## Introducer Bot
 
 При запуске бот выбирает человека и знакомит его со всеми остальными, задавая ему вопросы.
