@@ -1,0 +1,5 @@
+# Channel, where to post message
+channel: '#office-spb'
+
+# Message to post
+message: 'Завтра цветная пятница! Все приходим в {color}!'
