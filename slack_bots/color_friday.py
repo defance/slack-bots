@@ -10,7 +10,7 @@ DATA_DIR = Path('data') / APP_DIR
 
 def main(client):
     config = load_yaml(DATA_DIR / 'config.yaml')
-    choicer = RandomChoicer(APP_DIR / 'colors.txt')
+    choicer = RandomChoicer(APP_DIR / 'colors.txt', non_repeated_len=3)
 
     client.chat_postMessage(
         channel=config['channel'],

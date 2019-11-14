@@ -5,24 +5,25 @@ from pathlib import Path
 
 class RandomChoicer:
 
-    def __init__(self, filename, base_dir='data', cache_dir='cache'):
+    def __init__(self, filename, base_dir='data', cache_dir='cache', non_repeated_len=1):
         self.file = os.path.abspath(os.path.join(base_dir, filename))
         cache_file = os.path.abspath(os.path.join(cache_dir, filename))
         self.cache_file = os.path.join(os.path.dirname(cache_file), 'used.' + os.path.basename(cache_file))
+        self.non_repeated_len = non_repeated_len
 
     def select(self):
         # TODO: Make thread safe
         possible = set(read_all_lines(self.file))
         try:
-            used = set(read_all_lines(self.cache_file))
+            used = list(read_all_lines(self.cache_file))
         except FileNotFoundError:
-            used = set()
-        variants = possible - used
+            used = list()
+        variants = possible - set(used)
         if not variants:
-            variants = possible
-            used = set()
+            variants = possible - set(used[-self.non_repeated_len:])
+            used = used[-self.non_repeated_len:]
         selected = random.choice(tuple(variants))
-        used.add(selected)
+        used.append(selected)
         self.save_cache(used)
         return selected
 
